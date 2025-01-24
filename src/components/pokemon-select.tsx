@@ -20,20 +20,23 @@ const PokemonSelect = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        onChange={handleSearch}
-        placeholder="Search Pokemon..."
-      />
-      {state.length > 0 && (
-        <div>
-          {state.map((pokemon) => (
-            <div key={pokemon}>{pokemon}</div>
-          ))}
-        </div>
-      )}
-    </div>
+    <>
+      <h1>Select Party</h1>
+      <div>
+        <input
+          type="text"
+          onChange={handleSearch}
+          placeholder="Search Pokemon..."
+        />
+        {state.length > 0 && (
+          <div>
+            {state.map((pokemon) => (
+              <div key={pokemon}>{pokemon}</div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
