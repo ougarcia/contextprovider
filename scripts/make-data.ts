@@ -30,7 +30,7 @@ async function main() {
       id,
     };
   });
-  writeFileSync("src/assets/data.json", JSON.stringify(pokemons, null, 2));
+  writeFileSync("src/assets/data.json", JSON.stringify({ pokemons }, null, 2));
 
   // fetch sprites
   for (const pokemon of pokemons) {
