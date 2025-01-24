@@ -1,15 +1,18 @@
-import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { pokemons } from "./assets/data.json";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import PokemonParty from "./components/pokemon-party";
+import PokemonSelect from "./components/pokemon-select";
+
+function getRandomSix<T>(arr: T[]): T[] {
+  return arr.sort(() => Math.random() - 0.5).slice(0, 6);
+}
 
 function App() {
-  const [count, setCount] = useState(0);
-  // create a `PokemonPartyList` component and but it somewhere on the tree
   // create a `PokemonSelect` component and put it somewhere on the tree
-  // create a `pokemonPartyReduced and add it to context
-  // add the pokemons data into context
+  // create a `pokemonPartyReducer` and add it to context
+  // add the pokemons data into context instead of prop drilling.
 
   return (
     <>
@@ -21,20 +24,11 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <h1 className="text-3xl font-bold underline">Vite + React</h1>
+      <div>
+        <PokemonParty names={getRandomSix(pokemons).map((e) => e.name)} />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      {JSON.stringify(pokemons)}
-      <p></p>
+      <PokemonSelect />
     </>
   );
 }
