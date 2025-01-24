@@ -1,11 +1,15 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import data from "./assets/data.json";
+import { pokemons } from "./assets/data.json";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  // create a `PokemonPartyList` component and but it somewhere on the tree
+  // create a `PokemonSelect` component and put it somewhere on the tree
+  // create a `pokemonPartyReduced and add it to context
+  // add the pokemons data into context
 
   return (
     <>
@@ -29,7 +33,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      {JSON.stringify(data.pokemons)}
+      {JSON.stringify(pokemons)}
       <p></p>
     </>
   );
