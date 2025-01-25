@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import PokemonItem from "./pokemon-item";
-import { PokemonPartyContext } from "../lib/PokemonContext";
+import PokemonItem from "./PokemonItem";
+import { usePokemon } from "../lib/PokemonContext";
 
 function PokemonParty() {
-  const pokemons = useContext(PokemonPartyContext);
+  const pokemons = usePokemon();
   const partyPokemon = pokemons.filter((p) => p.isSelected);
   return (
     <>

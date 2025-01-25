@@ -1,12 +1,10 @@
-import type { Pokemon } from "../lib/types";
+import { useState } from "react";
+import { usePokemon } from "../lib/PokemonContext";
+import PokemonItem from "./PokemonItem";
 
-import { useContext, useState } from "react";
-import { PokemonPartyContext } from "../lib/PokemonContext";
-import PokemonItem from "./pokemon-item";
-
-const PokemonSelect = () => {
+function PokemonSelect() {
   const [searchTerm, setSearchTerm] = useState("");
-  const pokemons = useContext(PokemonPartyContext);
+  const pokemons = usePokemon();
 
   const filteredPokemons = searchTerm
     ? pokemons.filter((p) =>
@@ -38,6 +36,6 @@ const PokemonSelect = () => {
       </div>
     </>
   );
-};
+}
 
 export default PokemonSelect;

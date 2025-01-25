@@ -1,7 +1,7 @@
 import "./App.css";
 import Logo from "./components/logo";
-import PokemonParty from "./components/pokemon-party";
-import PokemonSelect from "./components/pokemon-select";
+import PokemonParty from "./components/PokemonParty";
+import PokemonSelect from "./components/PokemonSelect";
 import { PokemonProvider } from "./lib/PokemonContext";
 
 function App() {

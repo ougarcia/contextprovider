@@ -1,17 +1,11 @@
-import { useContext } from "react";
-import { Pokemon } from "../lib/types";
-import {
-  PokemonPartyContext,
-  PokemonPartyDispatchContext,
-} from "../lib/PokemonContext";
+import type { Pokemon } from "../lib/types";
+import { usePokemon, usePokemonDispatch } from "../lib/PokemonContext";
 
-type PokemonItemProps = {
-  pokemon: Pokemon;
-};
+type Props = { pokemon: Pokemon };
 
-const PokemonItem = ({ pokemon }: PokemonItemProps) => {
-  const dispatch = useContext(PokemonPartyDispatchContext);
-  const pokemons = useContext(PokemonPartyContext);
+function PokemonItem({ pokemon }: Props) {
+  const pokemons = usePokemon();
+  const dispatch = usePokemonDispatch();
   if (!dispatch) {
     throw new Error("PokemonPartyDisaptchContext Provider missing");
   }
@@ -33,6 +27,6 @@ const PokemonItem = ({ pokemon }: PokemonItemProps) => {
       <span>{pokemon.name}</span>
     </div>
   );
-};
+}
 
 export default PokemonItem;
