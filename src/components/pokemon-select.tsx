@@ -20,7 +20,7 @@ const PokemonSelect = () => {
 
   return (
     <>
-      <h1>Select Party</h1>
+      <h1>Search and Select Party</h1>
       <div>
         <input
           type="text"

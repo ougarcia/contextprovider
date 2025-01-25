@@ -12,7 +12,6 @@ import {
 import initialPokemons from "./lib/initialPokemons";
 import pokemonPartyReducer from "./lib/PokemonReducer";
 
-// TODO: need to connect the pokemons in the provider
 function App() {
   const [pokemons, dispatch] = useReducer(pokemonPartyReducer, initialPokemons);
 
