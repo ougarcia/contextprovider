@@ -12,10 +12,6 @@ import {
 import initialPokemons from "./lib/initialPokemons";
 import pokemonPartyReducer from "./lib/PokemonReducer";
 
-function getRandomSix<T>(arr: T[]): T[] {
-  return arr.sort(() => Math.random() - 0.5).slice(0, 6);
-}
-
 // TODO: need to connect the pokemons in the provider
 function App() {
   const [pokemons, dispatch] = useReducer(pokemonPartyReducer, initialPokemons);
@@ -25,7 +21,7 @@ function App() {
       <Logo />
       <PokemonPartyContext.Provider value={pokemons}>
         <PokemonPartyDispatchContext.Provider value={dispatch}>
-          <PokemonParty pokemons={getRandomSix(pokemons)} />
+          <PokemonParty pokemons={pokemons.filter((p) => p.isSelected)} />
           <PokemonSelect />
         </PokemonPartyDispatchContext.Provider>
       </PokemonPartyContext.Provider>
