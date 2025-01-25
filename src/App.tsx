@@ -16,11 +16,9 @@ function getRandomSix<T>(arr: T[]): T[] {
   return arr.sort(() => Math.random() - 0.5).slice(0, 6);
 }
 
+// TODO: need to connect the pokemons in the provider
 function App() {
   const [pokemons, dispatch] = useReducer(pokemonPartyReducer, initialPokemons);
-
-  // const handleAddPokemon = (id: number) => dispatch({ id, type: "add" });
-  // const handleDeletePokemon = (id: number) => dispatch({ id, type: "remove" });
 
   return (
     <>

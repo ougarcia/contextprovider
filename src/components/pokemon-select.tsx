@@ -1,23 +1,21 @@
+import type { Pokemon } from "../lib/types";
+
 import { useContext, useState } from "react";
 import { PokemonPartyContext } from "../lib/PokemonContext";
-import type { Pokemon } from "../lib/types";
 import PokemonItem from "./pokemon-item";
 
 const PokemonSelect = () => {
-  const [state, setState] = useState<Pokemon[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const pokemons = useContext(PokemonPartyContext);
 
+  const filteredPokemons = searchTerm
+    ? pokemons.filter((p) =>
+        p.name.toLowerCase().startsWith(searchTerm.toLowerCase()),
+      )
+    : [];
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value.length === 0) {
-      setState([]);
-      return;
-    }
-    setState(
-      pokemons.filter((pn) =>
-        pn.name.toLowerCase().startsWith(value.toLowerCase()),
-      ),
-    );
+    setSearchTerm(e.target.value);
   };
 
   return (
@@ -26,12 +24,13 @@ const PokemonSelect = () => {
       <div>
         <input
           type="text"
+          value={searchTerm}
           onChange={handleSearch}
           placeholder="Search Pokemon..."
         />
-        {state.length > 0 && (
+        {filteredPokemons.length > 0 && (
           <div>
-            {state.map((p) => (
+            {filteredPokemons.map((p) => (
               <PokemonItem key={p.id} pokemon={p} />
             ))}
           </div>
