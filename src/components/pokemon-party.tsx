@@ -1,19 +1,16 @@
-type PokemonPartyItemProps = {
-  name: string;
-};
+import type { Pokemon } from "../lib/types";
+import PokemonItem from "./pokemon-item";
 
 type PokemonPartyProps = {
-  names: string[];
+  pokemons: Pokemon[];
 };
 
-const PokemonPartyItem = ({ name }: PokemonPartyItemProps) => <div>{name}</div>;
-
-const PokemonParty = ({ names }: PokemonPartyProps) => (
+const PokemonParty = ({ pokemons }: PokemonPartyProps) => (
   <>
     <h1>Current Party</h1>
     <div>
-      {names.map((n) => (
-        <PokemonPartyItem key={n} name={n} />
+      {pokemons.map((p) => (
+        <PokemonItem key={p.id} pokemon={p} />
       ))}
     </div>
   </>

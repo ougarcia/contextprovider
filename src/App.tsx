@@ -1,27 +1,20 @@
-import { pokemons as baseData } from "./assets/data.json";
-
 import "./App.css";
+
+import { useReducer } from "react";
 
 import Logo from "./components/logo";
 import PokemonParty from "./components/pokemon-party";
 import PokemonSelect from "./components/pokemon-select";
-import { useReducer } from "react";
 import {
   PokemonPartyContext,
   PokemonPartyDispatchContext,
-} from "./PokemonContext";
+} from "./lib/PokemonContext";
+import type { Action, Pokemon } from "./lib/types";
+import initialPokemons from "./lib/initialPokemons";
 
 function getRandomSix<T>(arr: T[]): T[] {
   return arr.sort(() => Math.random() - 0.5).slice(0, 6);
 }
-
-type Pokemon = { id: number; name: string; isSelected: boolean };
-type Action = { type: "add" | "remove"; id: number };
-
-const initialPokemons: Pokemon[] = baseData.map((p) => ({
-  ...p,
-  isSelected: false,
-}));
 
 function pokemonPartyReducer(pokemon: Pokemon[], action: Action): Pokemon[] {
   const changedPokemonIndex = pokemon.findIndex((p) => p.id === action.id);
@@ -63,7 +56,7 @@ function App() {
       <Logo />
       <PokemonPartyContext.Provider value={pokemons}>
         <PokemonPartyDispatchContext.Provider value={dispatch}>
-          <PokemonParty names={getRandomSix(baseData).map((e) => e.name)} />
+          <PokemonParty pokemons={getRandomSix(pokemons)} />
           <PokemonSelect />
         </PokemonPartyDispatchContext.Provider>
       </PokemonPartyContext.Provider>

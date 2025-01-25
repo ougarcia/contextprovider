@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { pokemons } from "../assets/data.json";
-
-const POKEMON_NAMES = pokemons.map((p) => p.name);
+import { useContext, useState } from "react";
+import { PokemonPartyContext } from "../lib/PokemonContext";
+import type { Pokemon } from "../lib/types";
+import PokemonItem from "./pokemon-item";
 
 const PokemonSelect = () => {
-  const [state, setState] = useState<string[]>([]);
+  const [state, setState] = useState<Pokemon[]>([]);
+  const pokemons = useContext(PokemonPartyContext);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -13,8 +14,8 @@ const PokemonSelect = () => {
       return;
     }
     setState(
-      POKEMON_NAMES.filter((pn) =>
-        pn.toLowerCase().startsWith(value.toLowerCase()),
+      pokemons.filter((pn) =>
+        pn.name.toLowerCase().startsWith(value.toLowerCase()),
       ),
     );
   };
@@ -30,8 +31,8 @@ const PokemonSelect = () => {
         />
         {state.length > 0 && (
           <div>
-            {state.map((pokemon) => (
-              <div key={pokemon}>{pokemon}</div>
+            {state.map((p) => (
+              <PokemonItem key={p.id} pokemon={p} />
             ))}
           </div>
         )}
