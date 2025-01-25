@@ -9,40 +9,11 @@ import {
   PokemonPartyContext,
   PokemonPartyDispatchContext,
 } from "./lib/PokemonContext";
-import type { Action, Pokemon } from "./lib/types";
 import initialPokemons from "./lib/initialPokemons";
+import pokemonPartyReducer from "./lib/PokemonReducer";
 
 function getRandomSix<T>(arr: T[]): T[] {
   return arr.sort(() => Math.random() - 0.5).slice(0, 6);
-}
-
-function pokemonPartyReducer(pokemon: Pokemon[], action: Action): Pokemon[] {
-  const changedPokemonIndex = pokemon.findIndex((p) => p.id === action.id);
-  const head = pokemon.slice(0, changedPokemonIndex);
-  const tail = pokemon.slice(changedPokemonIndex + 1);
-  switch (action.type) {
-    case "add": {
-      const partyCount = pokemon.filter((p) => p.isSelected).length;
-      if (partyCount === 6) {
-        return pokemon;
-      }
-      return [
-        ...head,
-        { ...pokemon[changedPokemonIndex], isSelected: true },
-        ...tail,
-      ];
-    }
-    case "remove": {
-      return [
-        ...head,
-        { ...pokemon[changedPokemonIndex], isSelected: false },
-        ...tail,
-      ];
-    }
-    default: {
-      throw Error("Unknown action: " + action.type);
-    }
-  }
 }
 
 function App() {
